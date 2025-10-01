@@ -8,7 +8,7 @@ class Product:
         return self.price * self.quantity
     
     def __str__(self):
-        return f"{self.name}: ${self.price} x {self.quantity} = ${self.total_price():.2f}"
+        return f"{self.name}: ${self.price} x {self.quantity} = ${self.total_price()}"
 
 class ShoppingCart:
     def __init__(self):
@@ -36,7 +36,7 @@ class ShoppingCart:
             return
         for product in self.items.values():
             print(product)
-        print(f"Total: ${self.total_price():.2f}")
+        print(f"Total: ${self.total_price()}")
     
     def total_price(self):
         return sum(p.total_price() for p in self.items.values())
@@ -49,4 +49,4 @@ if __name__ == "__main__":
     
     cart.view_cart()
     
-    print(f"Checkout Total: ${cart.total_price():.2f}")
+    print(f"Checkout Total: ${cart.total_price()}")
