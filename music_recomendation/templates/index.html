@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Music Recommendation App</title>
+</head>
+<body>
+
+    <h2>🎵 Music Recommendation System</h2>
+
+    <!-- Input box -->
+    <input type="text" id="song" placeholder="Enter song name">
+
+    <!-- Button -->
+    <button onclick="getRecommendation()">Recommend</button>
+
+    <!-- Result -->
+    <h3>Recommended Songs:</h3>
+    <ul id="result"></ul>
+
+    <script>
+        function getRecommendation() {
+            let songName = document.getElementById("song").value;
+
+            fetch("/recommend", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ song: songName })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let list = document.getElementById("result");
+                list.innerHTML = "";
+
+                data.recommended_songs.forEach(song => {
+                    let li = document.createElement("li");
+                    li.textContent = song;
+                    list.appendChild(li);
+                });
+            });
+        }
+    </script>
+
+</body>
+</html>
